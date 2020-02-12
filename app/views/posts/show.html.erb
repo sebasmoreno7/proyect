@@ -1,0 +1,19 @@
+<h1>This is your posts</h1>
+
+
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <%= @post.title%>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <%= @post.description%>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <% if @post.image.attached? %>
+    <%= image_tag @post.image, height: 160 %>
+    <% end %> 
+  </div>
+</div>
+<%= button_to "Delete", @post, method:  :delete %> 
+
+<%= button_to "Edit","/posts/#{@post.id}/edit",  method: :get %> 

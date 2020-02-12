@@ -1,0 +1,9 @@
+<h1>Crear usuario</h1>
+
+
+<% if current_user%>
+  <%= link_to 'Cerrar sesion', destroy_user_session_path, method: :delete %>
+  <% else%>
+   <%=link_to 'Iniciar sesion', new_user_registration_path %>
+   <%=link_to 'Registrarse' , new_user_session_path %>
+   <% end %>
