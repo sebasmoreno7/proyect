@@ -1,13 +1,21 @@
-hola mundo, bonito
+Posts creados por deportistas
+
 <% @posts.each do |post| %>
-  <%= image_tag post.image, height: 160%>
-<% end %>
-<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
+<center>
+  <div class="card" style="width: 25rem; height: 20rem ">
+  <img src="" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <h3 class="card-title"><%= post.title%></h3>
+    
+    <p class="card-text"></p>
+    <%= post.description%>
+    
+    <p> <% if post.image.attached? %>
+    <%= image_tag post.image, height: 160 %> </p>
+    <% end %> 
   </div>
 </div>
+</center>
+<% end %>
+
 <%=button_to "new post", "/posts/new",  method: :get %> 

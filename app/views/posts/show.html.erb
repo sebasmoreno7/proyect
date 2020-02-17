@@ -1,19 +1,20 @@
-<h1>This is your posts</h1>
+<h1>This is your post</h1>
 
-
-<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
+<center>
+<div class="card" style="width: 25rem; height: 20rem ">
+  <img src="" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <%= @post.title%>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <%= @post.description%>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <h1 class="card-title"><%= @post.title%></h1>
+    
+    <p class="card-text"></p>
+    <p <%= @post.description%> /p>
+    
     <% if @post.image.attached? %>
     <%= image_tag @post.image, height: 160 %>
     <% end %> 
   </div>
 </div>
+</center>
 <%= button_to "Delete", @post, method:  :delete %> 
 
 <%= button_to "Edit","/posts/#{@post.id}/edit",  method: :get %> 

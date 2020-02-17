@@ -1,7 +1,8 @@
-class PostsController < ApplicationController
-    before_action :set_post, only: [:show, :edit, :update, :destroy]
+class PagesController <  ApplicationController
+
+    before_action :set_page, only: [:show, :edit, :update, :destroy]
         def index
-      @posts = Post.all
+      @pages = Page.all
         end
   
     # GET /burgers/1
@@ -11,36 +12,37 @@ class PostsController < ApplicationController
   
     # GET /burgers/new
     def new
-      @post = Post.new
+      @page = Page.new
     end
   
     # GET /burgers/1/edit
     def edit
-       @post = Post.find(params[:id])
+       @page = Page.find(params[:id])
     end
     
   
     # POST /burgers
     # POST /burgers.json
     def create
-      @post = current_user.posts.new(post_params)
+      @page = current_user.pages.new(page_params)
   
   
-        if @post.save
-           redirect_to @post, notice: 'Post was successfully created.'
+        if @page.save
+           redirect_to @page, notice: 'Page was successfully created.'
   
         else
            render :new
   
         end
+  
     end
   
     # PATCH/PUT /burgers/1
     # PATCH/PUT /burgers/1.json
     def update
   
-        if @post.update(post_params)
-           redirect_to @post, notice: 'Post was successfully updated.'
+        if @page.update(page_params)
+           redirect_to @page, notice: 'Page was successfully updated.'
   
         else
           render :edit
@@ -51,7 +53,7 @@ class PostsController < ApplicationController
     # DELETE /burgers/1
     # DELETE /burgers/1.json
     def destroy
-      Post.find(params[:id]).destroy
+      Page.find(params[:id]).destroy
       redirect_to "/posts"
     end
   
