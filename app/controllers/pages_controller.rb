@@ -5,7 +5,7 @@ class PagesController <  ApplicationController
       @pages = Page.all
         end
   
-    # GET /burgers/1
+    # GET /burgers/1 
     # GET /burgers/1.json
     def show
     end
