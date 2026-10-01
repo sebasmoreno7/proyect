@@ -1,21 +1,16 @@
-Posts creados por deportistas
+<h1>Posts creados por deportistas</h1>
 
 <% @posts.each do |post| %>
-<center>
-  <div class="card" style="width: 25rem; height: 20rem ">
-  <img src="" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h3 class="card-title"><%= post.title%></h3>
-    
-    <p class="card-text"></p>
-    <%= post.description%>
-    
-    <p> <% if post.image.attached? %>
-    <%= image_tag post.image, height: 160 %> </p>
-    <% end %> 
+  <div class="card mx-auto mb-3" style="max-width: 28rem">
+    <% if post.image.attached? %>
+      <%= image_tag post.image, class: "card-img-top", alt: post.title %>
+    <% end %>
+    <div class="card-body">
+      <h2 class="card-title"><%= post.title %></h2>
+      <p class="card-text"><%= post.description %></p>
+      <%= link_to "View", post_path(post), class: "btn btn-secondary" %>
+    </div>
   </div>
-</div>
-</center>
 <% end %>
 
-<%=button_to "new post", "/posts/new",  method: :get %> 
+<%= link_to "New post", new_post_path, class: "btn btn-primary" %>

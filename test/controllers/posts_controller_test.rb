@@ -42,4 +42,30 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_equal @other, Post.order(:id).last.user
   end
+
+  test 'visitors can read a post but only its owner sees edit and delete controls' do
+    get posts_path
+    assert_response :success
+    assert_select "a[href=?]", post_path(@post), text: "View"
+
+    get post_path(@post)
+    assert_response :success
+    assert_select ".card-text", text: "Owner content"
+    assert_select "a[href=?]", edit_post_path(@post), count: 0
+    assert_select "form[action=?]", post_path(@post), count: 0
+
+    sign_in @other
+    get post_path(@post)
+    assert_select "a[href=?]", edit_post_path(@post), count: 0
+    assert_select "form[action=?]", post_path(@post), count: 0
+  end
+
+  test 'post owner sees edit and delete controls' do
+    sign_in @owner
+    get post_path(@post)
+    assert_response :success
+    assert_select "a[href=?]", edit_post_path(@post)
+    assert_select "form[action=?][method=post]", post_path(@post)
+    assert_select "form[action=?] input[name=_method][value=delete]", post_path(@post)
+  end
 end
