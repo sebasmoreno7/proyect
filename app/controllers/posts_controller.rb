@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
+    before_action :authenticate_user!, except: [:index, :show]
     before_action :set_post, only: [:show, :edit, :update, :destroy]
+    before_action :authorize_post!, only: [:edit, :update, :destroy]
         def index
       @posts = Post.all
         end
@@ -51,7 +53,7 @@ class PostsController < ApplicationController
     # DELETE /burgers/1
     # DELETE /burgers/1.json
     def destroy
-      Post.find(params[:id]).destroy
+      @post.destroy
       redirect_to "/posts"
     end
   
@@ -61,8 +63,12 @@ class PostsController < ApplicationController
         @post = Post.find(params[:id])
       end
   
+      def authorize_post!
+        redirect_to posts_path, alert: 'Not authorized' unless @post.user == current_user
+      end
+
       # Never trust parameters from the scary internet, only allow the white list through.
       def post_params
-        params.require(:post).permit(:title, :user_id, :description, :image)
+        params.require(:post).permit(:title, :description, :image)
       end
   end
